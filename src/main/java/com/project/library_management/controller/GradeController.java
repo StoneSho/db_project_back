@@ -43,4 +43,15 @@ public class GradeController {
         wrapper.eq("course_id", course_id);
         return gradeMapper.selectList(wrapper);
     }
+
+    // 录入学生成绩
+    @PostMapping("/grade/add")
+    public String addGrade(@RequestBody Grade grade) {
+        int result = gradeMapper.insert(grade);
+        if (result > 0) {
+            return "成绩录入成功：" + grade.toString();
+        } else {
+            return "成绩录入失败";
+        }
+    }
 }
