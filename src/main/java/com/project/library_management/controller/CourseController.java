@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin  // 允许跨域
+@CrossOrigin  // 允许跨域请求
 public class CourseController {
-    @Autowired
+    @Autowired //自动注入？
     private CourseMapper courseMapper;
 
     @Autowired
@@ -60,7 +60,7 @@ public class CourseController {
         return "添加课程: " + course.toString();
     }
 
-    // 删除课程（按ID）
+    // 按课程ID删除课程
     @DeleteMapping("/course/deleteById/{course_id}")
     public String deleteById(@PathVariable int course_id) {
         int result = courseMapper.deleteById(course_id);
@@ -70,7 +70,7 @@ public class CourseController {
             return "删除失败，未找到该ID";
     }
 
-    // 删除课程（按课程代码）
+    // 按课程代码删除课程
     @DeleteMapping("/course/deleteByCode/{course_code}")
     public String deleteByCode(@PathVariable String course_code) {
         QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
@@ -82,7 +82,7 @@ public class CourseController {
             return "删除失败，未找到该课程代码";
     }
 
-    // 修改课程（按课程代码）
+    // 按课程代码修改课程
     @PutMapping("/course/updateByCode")
     public String updateByCode(@RequestBody Course course) {
         UpdateWrapper<Course> updateWrapper = new UpdateWrapper<>();

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin // 允许跨域请求
 public class GradeController {
     @Autowired
     private GradeMapper gradeMapper;
@@ -44,14 +44,5 @@ public class GradeController {
         return gradeMapper.selectList(wrapper);
     }
 
-    // 录入学生成绩
-    @PostMapping("/grade/add")
-    public String addGrade(@RequestBody Grade grade) {
-        int result = gradeMapper.insert(grade);
-        if (result > 0) {
-            return "成绩录入成功：" + grade.toString();
-        } else {
-            return "成绩录入失败";
-        }
-    }
+
 }

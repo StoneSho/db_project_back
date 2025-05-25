@@ -25,7 +25,7 @@ public class StudentController {
 
     //根据studentId查找
     @GetMapping("/student/selectByid/{id}")
-    public List selectByid(@PathVariable int id){
+    public List<Student> selectByid(@PathVariable int id){
         QueryWrapper<Student> queryWrapper = new QueryWrapper<Student>();
         queryWrapper.eq("studentId",id);
         return studentMapper.selectList(queryWrapper);
@@ -33,7 +33,7 @@ public class StudentController {
 
     //根据姓名查找
     @GetMapping("/student/selectByname/{name}")
-    public List selectByname(@PathVariable String name){
+    public List<Student> selectByname(@PathVariable String name){
         QueryWrapper<Student> queryWrapper = new QueryWrapper<Student>();
         queryWrapper.eq("name",name);
         System.out.println(name);
@@ -42,7 +42,7 @@ public class StudentController {
 
     //根据学号查找
     @GetMapping("/student/selectBynumber/{studentNumber}")
-    public List selectBynumber(@PathVariable String studentNumber){
+    public List<Student> selectBynumber(@PathVariable String studentNumber){
         QueryWrapper<Student> queryWrapper = new QueryWrapper<Student>();
         queryWrapper.eq("studentNumber",studentNumber);
         System.out.println(studentNumber);
@@ -56,7 +56,7 @@ public class StudentController {
         return "添加学生: "+student.toString();
     }
 
-    // 删除学生（按ID）
+    // 根据ID删除学生
     @DeleteMapping("/student/deleteById/{id}")
     public String deleteById(@PathVariable int id) {
         int result = studentMapper.deleteById(id);
@@ -66,7 +66,7 @@ public class StudentController {
             return "删除失败，未找到该ID";
     }
 
-    // 删除学生（按学号）
+    // 根据学号删除学生
     @DeleteMapping("/student/deleteByNumber/{studentNumber}")
     public String deleteByNumber(@PathVariable String studentNumber) {
         QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
@@ -78,7 +78,7 @@ public class StudentController {
             return "删除失败，未找到该学号";
     }
 
-    // 修改学生（按学号）
+    // 根据学号修改学生
     @PutMapping("/student/updateBynumber")
     public String updateBynumber(@RequestBody Student student){
         UpdateWrapper<Student> updateWrapper = new UpdateWrapper<>();
